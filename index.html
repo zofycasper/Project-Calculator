@@ -56,9 +56,7 @@
                         // displayHistory =
                         //     displayHistory + operatorValue + displayValue;
                         // displayHis.textContent = displayHistory;
-                    } else displayHistory = displayHistory + displayValue;
-                    displayHis.textContent = displayHistory;
-
+                    }
                     oldValue = displayValue;
                     if (oldValue != result) {
                         a = oldValue;
@@ -68,13 +66,15 @@
 
                     displayValue = "";
                     operatorValue = operator.innerText;
-                    displayText = operatorValue + displayValue;
+                    displayText = displayValue;
                     if (result != undefined) {
                         display.textContent = result;
                     } else display.textContent = displayText;
                     console.log("operatorValue: " + operatorValue);
                     console.log("oldValue: " + oldValue);
                     console.log("a: " + a);
+                    displayHistory = displayHistory + a + operatorValue;
+                    displayHis.textContent = displayHistory;
                 });
             });
 
@@ -87,7 +87,7 @@
                     }
                     console.log("a: " + a);
                     displayValue = displayValue + number.innerText;
-                    displayText = operatorValue + displayValue;
+                    displayText = displayValue;
                     display.textContent = displayText;
                     console.log(`displayValue: ${displayValue}`);
                 });
@@ -104,18 +104,13 @@
                 console.log("oldValue: " + oldValue);
                 console.log("b: " + b);
 
-                operate();
-
-                displayHistory =
-                    displayHistory +
-                    operatorValue +
-                    displayValue +
-                    "=" +
-                    result;
+                displayHistory = displayHistory + b + "=";
                 displayHis.textContent = displayHistory;
 
+                operate();
+
                 displayValue = result;
-                displayText = "=" + result;
+                displayText = result;
                 display.textContent = displayText;
 
                 console.log(`displayValue: ${displayValue}`);
