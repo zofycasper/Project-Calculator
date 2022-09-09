@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="display-his"></div>
+            <div class="display">0</div>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="number">0</button>
+            <button class="operator">+</button>
+            <button class="operator">-</button>
+            <button class="operator">*</button>
+            <button class="operator">/</button>
+            <button class="equal">=</button>
+            <button id="clear">C</button>
+        </div>
+
+        <script>
+            const display = document.querySelector(".display");
+            const clear = document.querySelector("#clear");
+            const numbers = document.querySelectorAll(".number");
+            const operators = document.querySelectorAll(".operator");
+            const buttons = document.querySelectorAll(
+                ".number, operator, equal"
+            );
+            const equal = document.querySelector(".equal");
+            const displayHis = document.querySelector(".display-his");
+
+            let a;
+            let b;
+            let oldValue = "";
+            let operatorValue = "";
+            let displayValue = "";
+            let result;
+            let displayHistory = "";
+
+            operators.forEach((operator) => {
+                operator.addEventListener("click", () => {
+                    if (operatorValue != "") {
+                        equalTo();
+
+                        // operatorValue = operator.innerText;
+                        // displayHistory =
+                        //     displayHistory + operatorValue + displayValue;
+                        // displayHis.textContent = displayHistory;
+                    } else displayHistory = displayHistory + displayValue;
+                    displayHis.textContent = displayHistory;
+
+                    oldValue = displayValue;
+                    if (oldValue != result) {
+                        a = oldValue;
+                    } else if (oldValue == result) {
+                        a = result;
+                    }
+
+                    displayValue = "";
+                    operatorValue = operator.innerText;
+                    displayText = operatorValue + displayValue;
+                    if (result != undefined) {
+                        display.textContent = result;
+                    } else display.textContent = displayText;
+                    console.log("operatorValue: " + operatorValue);
+                    console.log("oldValue: " + oldValue);
+                    console.log("a: " + a);
+                });
+            });
+
+            numbers.forEach((number) => {
+                number.addEventListener("click", () => {
+                    if (result != undefined && operatorValue == "") {
+                        a = "";
+                        displayValue = "";
+                        result = undefined;
+                    }
+                    console.log("a: " + a);
+                    displayValue = displayValue + number.innerText;
+                    displayText = operatorValue + displayValue;
+                    display.textContent = displayText;
+                    console.log(`displayValue: ${displayValue}`);
+                });
+            });
+
+            equal.addEventListener("click", equalTo);
+
+            function equalTo() {
+                oldValue = displayValue;
+                b = oldValue;
+                // displayValue = "";
+
+                console.log("operatorValue: " + operatorValue);
+                console.log("oldValue: " + oldValue);
+                console.log("b: " + b);
+
+                operate();
+
+                displayHistory =
+                    displayHistory +
+                    operatorValue +
+                    displayValue +
+                    "=" +
+                    result;
+                displayHis.textContent = displayHistory;
+
+                displayValue = result;
+                displayText = "=" + result;
+                display.textContent = displayText;
+
+                console.log(`displayValue: ${displayValue}`);
+                console.log("result: " + result);
+                operatorValue = "";
+                console.log("operatorValue: " + operatorValue);
+                console.log("oldValue: " + oldValue);
+            }
+
+            clear.addEventListener("click", () => {
+                reset();
+                printKeyVariables();
+            });
+
+            function operate() {
+                a = parseInt(a);
+                b = parseInt(b);
+                if (operatorValue == "+") {
+                    add();
+                } else if (operatorValue == "-") {
+                    subtract();
+                } else if (operatorValue == "*") {
+                    multiply();
+                } else if (operatorValue == "/") {
+                    divide();
+                }
+            }
+
+            function reset() {
+                displayValue = "";
+                a = "";
+                b = "";
+                operatorValue = "";
+                displayText = "0";
+                oldValue = "";
+                display.textContent = displayText;
+            }
+
+            function printKeyVariables() {
+                console.log("operatorValue: " + operatorValue);
+                console.log("oldValue: " + oldValue);
+                console.log("a: " + a);
+                console.log(`displayValue: ${displayValue}`);
+            }
+
+            function add() {
+                result = a + b;
+                console.log(`${a} + ${b} = ${result}`);
+            }
+
+            function subtract() {
+                result = a - b;
+                console.log(`${a} - ${b} = ${result}`);
+            }
+
+            function multiply() {
+                result = a * b;
+                console.log(`${a} * ${b} = ${result}`);
+            }
+
+            function divide() {
+                result = a / b;
+                console.log(`${a} / ${b} = ${result}`);
+            }
+        </script>
+
+        <!-- <script>
+            let a;
+            let b;
+            let result;
+
+            function add() {
+                result = a + b;
+                console.log(`${a} + ${b} = ${result}`);
+                alert(`${a} + ${b} = ${result}`);
+            }
+
+            function subtract() {
+                result = a - b;
+                console.log(`${a} - ${b} = ${result}`);
+                alert(`${a} - ${b} = ${result}`);
+            }
+
+            function multiply() {
+                result = a * b;
+                console.log(`${a} * ${b} = ${result}`);
+                alert(`${a} * ${b} = ${result}`);
+            }
+
+            function divide() {
+                result = a / b;
+                console.log(`${a} / ${b} = ${result}`);
+                alert(`${a} / ${b} = ${result}`);
+            }
+
+            function operate() {
+                a = parseInt(prompt("a: "));
+                let operate = prompt("enter operation: ");
+                b = parseInt(prompt("b: "));
+                if (operate == "+") {
+                    add();
+                } else if (operate == "-") {
+                    subtract();
+                } else if (operate == "*") {
+                    multiply();
+                } else if (operate == "/") {
+                    divide();
+                }
+            }
+            operate();
+        </script> -->
+    </body>
+</html>
