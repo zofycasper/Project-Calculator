@@ -4,36 +4,52 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
         <title>Document</title>
     </head>
     <body>
         <div class="container">
-            <div class="current-display">
-                <h2>Current:</h2>
-                <div id="current">-</div>
+            <div class="container-1">
+                <div class="current-display">
+                    <div id="current">-</div>
+                </div>
+                <div class="display">0</div>
+                <div class="btn-container">
+                    <div class="container11">
+                        <div class="container111">
+                            <button id="clear">c</button
+                            ><button class="operator" id="n111">/</button
+                            ><button class="operator" id="n106">*</button>
+                        </div>
+                        <div class="container112">
+                            <button class="number" id="n103">7</button
+                            ><button class="number" id="n104">8</button
+                            ><button class="number" id="n105">9</button>
+                        </div>
+                        <div class="container113">
+                            <button class="number" id="n100">4</button
+                            ><button class="number" id="n101">5</button
+                            ><button class="number" id="n102">6</button>
+                        </div>
+                        <div class="container114">
+                            <button class="number" id="n97">1</button>
+                            <button class="number" id="n98">2</button>
+                            <button class="number" id="n99">3</button>
+                        </div>
+                        <div class="container115">
+                            <button class="number" id="n96">0</button>
+                            <button class="number">.</button>
+                        </div>
+                    </div>
+                    <div class="container12">
+                        <button class="operator" id="n109">-</button>
+                        <button class="operator" id="n107">+</button>
+                        <button class="equal" id="n13">=</button>
+                    </div>
+                </div>
             </div>
-            <div class="display">0</div>
-            <button class="number" id="n96">0</button>
-            <button class="number" id="n97">1</button>
-            <button class="number" id="n98">2</button>
-            <button class="number" id="n99">3</button>
-            <button class="number" id="n100">4</button>
-            <button class="number" id="n101">5</button>
-            <button class="number" id="n102">6</button>
-            <button class="number" id="n103">7</button>
-            <button class="number" id="n104">8</button>
-            <button class="number" id="n105">9</button>
-
-            <button class="operator" id="n107">+</button>
-            <button class="operator" id="n109">-</button>
-            <button class="operator" id="n106">*</button>
-            <button class="operator" id="n111">/</button>
-            <button class="equal" id="n13">=</button>
-            <button id="clear">C</button>
             <!-- <div class="display-his"></div> -->
-            <div class="history">
-                <h2>History:</h2>
-            </div>
+            <div class="history"></div>
         </div>
         <!-- <div class="display-his"></div> -->
         <script>

@@ -1,0 +1,147 @@
+body {
+    background-color: rgb(35, 38, 46);
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 20px;
+}
+
+.container {
+    margin-top: 350px;
+    display: flex;
+    justify-content: center;
+
+    width: 960px;
+    height: 1080px;
+}
+
+.history {
+    width: 200px;
+}
+
+.btn-container {
+    display: flex;
+    border: solid;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.container11 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container12 {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    margin: 2px;
+    border: 0px;
+    padding: 0px;
+    border-radius: 3px;
+    background-color: rgb(26, 230, 210);
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(32, 32, 32);
+}
+
+button:hover {
+    background-color: rgb(23, 174, 159);
+}
+
+.display {
+    border: solid;
+    border-top: 0px;
+    border-bottom: 0px;
+    height: 100px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 80px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.current-display {
+    border: solid;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 0px;
+    padding: 10px;
+}
+
+#n107 {
+    height: 204px;
+}
+
+#n13 {
+    height: 204px;
+    background-color: rgb(245, 225, 123);
+}
+
+#n13:hover {
+    background-color: rgb(188, 173, 96);
+}
+
+#n96 {
+    width: 204px;
+}
+
+#clear {
+    background-color: rgb(159, 235, 118);
+}
+
+#clear:hover {
+    background-color: rgb(115, 169, 85);
+}
+
+#n106,
+#n107,
+#n109,
+#n111 {
+    background-color: rgb(27, 201, 184);
+}
+
+#n106:hover,
+#n107:hover,
+#n109:hover,
+#n111:hover {
+    background-color: rgb(30, 236, 216);
+}
+
+.container111,
+.container112,
+.container113,
+.container114,
+.container115 {
+    display: flex;
+    justify-content: baseline;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+/* 
+color:
+rgb(207, 108, 237);
+rgb(150, 224, 110);
+rgb(255, 230, 109);
+rgb(23, 219, 198);
+
+*/
