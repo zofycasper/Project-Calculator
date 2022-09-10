@@ -8,36 +8,44 @@
     </head>
     <body>
         <div class="container">
-            <div class="display-his"></div>
+            <div class="current-display">
+                <h2>Current:</h2>
+                <div id="current">-</div>
+            </div>
             <div class="display">0</div>
-            <button class="number">1</button>
-            <button class="number">2</button>
-            <button class="number">3</button>
-            <button class="number">4</button>
-            <button class="number">5</button>
-            <button class="number">6</button>
-            <button class="number">7</button>
-            <button class="number">8</button>
-            <button class="number">9</button>
-            <button class="number">0</button>
-            <button class="operator">+</button>
-            <button class="operator">-</button>
-            <button class="operator">*</button>
-            <button class="operator">/</button>
-            <button class="equal">=</button>
-            <button id="clear">C</button>
-        </div>
+            <button class="number" id="n96">0</button>
+            <button class="number" id="n97">1</button>
+            <button class="number" id="n98">2</button>
+            <button class="number" id="n99">3</button>
+            <button class="number" id="n100">4</button>
+            <button class="number" id="n101">5</button>
+            <button class="number" id="n102">6</button>
+            <button class="number" id="n103">7</button>
+            <button class="number" id="n104">8</button>
+            <button class="number" id="n105">9</button>
 
+            <button class="operator" id="n107">+</button>
+            <button class="operator" id="n109">-</button>
+            <button class="operator" id="n106">*</button>
+            <button class="operator" id="n111">/</button>
+            <button class="equal" id="n13">=</button>
+            <button id="clear">C</button>
+            <!-- <div class="display-his"></div> -->
+            <div class="history">
+                <h2>History:</h2>
+            </div>
+        </div>
+        <!-- <div class="display-his"></div> -->
         <script>
             const display = document.querySelector(".display");
             const clear = document.querySelector("#clear");
             const numbers = document.querySelectorAll(".number");
             const operators = document.querySelectorAll(".operator");
-            const buttons = document.querySelectorAll(
-                ".number, operator, equal"
-            );
+            const buttons = document.querySelectorAll(".number");
             const equal = document.querySelector(".equal");
-            const displayHis = document.querySelector(".display-his");
+            // const displayHis = document.querySelector(".display-his");
+            const currentProc = document.querySelector("#current");
+            const history = document.querySelector(".history");
 
             let a;
             let b;
@@ -45,57 +53,78 @@
             let operatorValue = "";
             let displayValue = "";
             let result;
-            let displayHistory = "";
+            // let displayHistory = "";
+            let currentProcess = "";
+            let calRecord = "";
+            let keyInput = "";
+
+            window.addEventListener("keydown", (e) => {
+                // keyInput = document.querySelector(`#n${e.keyCode}`);
+                // input = keyInput.innerText;
+                // console.log("input: " + input);
+                console.log("e.keyCode: " + e.keyCode);
+                if (95 < e.keyCode && e.keyCode < 106) {
+                    keyInput = document.querySelector(`#n${e.keyCode}`);
+                    input = keyInput.innerText;
+                    console.log("input: " + input);
+                    numberTo();
+                } else if (
+                    e.keyCode == 107 ||
+                    e.keyCode == 106 ||
+                    e.keyCode == 109 ||
+                    e.keyCode == 111
+                ) {
+                    keyInput = document.querySelector(`#n${e.keyCode}`);
+                    input = keyInput.innerText;
+                    console.log("input: " + input);
+
+                    operatorTo();
+                } else if (e.keyCode == 13) {
+                    keyInput = document.querySelector(`#n${e.keyCode}`);
+                    input = keyInput.innerText;
+                    console.log("input: " + input);
+                    equalTo();
+                }
+            });
 
             operators.forEach((operator) => {
                 operator.addEventListener("click", () => {
-                    if (operatorValue != "") {
-                        equalTo();
-
-                        // operatorValue = operator.innerText;
-                        // displayHistory =
-                        //     displayHistory + operatorValue + displayValue;
-                        // displayHis.textContent = displayHistory;
-                    }
-                    oldValue = displayValue;
-                    if (oldValue != result) {
-                        a = oldValue;
-                    } else if (oldValue == result) {
-                        a = result;
-                    }
-
-                    displayValue = "";
-                    operatorValue = operator.innerText;
-                    displayText = displayValue;
-                    if (result != undefined) {
-                        display.textContent = result;
-                    } else display.textContent = displayText;
-                    console.log("operatorValue: " + operatorValue);
-                    console.log("oldValue: " + oldValue);
-                    console.log("a: " + a);
-                    displayHistory = displayHistory + a + operatorValue;
-                    displayHis.textContent = displayHistory;
+                    input = operator.innerText;
+                    operatorTo();
                 });
             });
 
             numbers.forEach((number) => {
                 number.addEventListener("click", () => {
-                    if (result != undefined && operatorValue == "") {
-                        a = "";
-                        displayValue = "";
-                        result = undefined;
-                    }
-                    console.log("a: " + a);
-                    displayValue = displayValue + number.innerText;
-                    displayText = displayValue;
-                    display.textContent = displayText;
-                    console.log(`displayValue: ${displayValue}`);
+                    input = number.innerText;
+                    console.log("input: " + input);
+                    numberTo();
                 });
             });
 
             equal.addEventListener("click", equalTo);
 
+            clear.addEventListener("click", () => {
+                reset();
+                printKeyVariables();
+            });
+
             function equalTo() {
+                if (
+                    currentProc.textContent == "-" &&
+                    display.textContent == 0
+                ) {
+                    return;
+                }
+                if (operatorValue == "") {
+                    return;
+                }
+                if (displayValue == "") {
+                    operatorValue = input;
+                    currentProcess = a + operatorValue;
+                    currentProc.textContent = currentProcess;
+                    return;
+                }
                 oldValue = displayValue;
                 b = oldValue;
                 // displayValue = "";
@@ -104,14 +133,26 @@
                 console.log("oldValue: " + oldValue);
                 console.log("b: " + b);
 
-                displayHistory = displayHistory + b + "=";
-                displayHis.textContent = displayHistory;
+                // displayHistory = displayHistory + b + "=";
+                // displayHis.textContent = displayHistory;
+                currentProcess = currentProcess + b + "=";
+                currentProc.textContent = currentProcess;
+                currentProcess = "";
 
                 operate();
 
                 displayValue = result;
                 displayText = result;
                 display.textContent = displayText;
+
+                if (operatorValue != "") {
+                    calRecord = `${a} ${operatorValue} ${b} = ${result}`;
+                } else return;
+                const record = document.createElement("div");
+                record.classList.add("record");
+                record.textContent = calRecord;
+                console.log("calRecord: " + calRecord);
+                history.appendChild(record);
 
                 console.log(`displayValue: ${displayValue}`);
                 console.log("result: " + result);
@@ -120,10 +161,57 @@
                 console.log("oldValue: " + oldValue);
             }
 
-            clear.addEventListener("click", () => {
-                reset();
-                printKeyVariables();
-            });
+            function numberTo() {
+                if (result != undefined && operatorValue == "") {
+                    a = "";
+                    displayValue = "";
+                    result = undefined;
+                }
+                console.log("a: " + a);
+                displayValue = displayValue + input;
+                displayText = displayValue;
+                display.textContent = displayText;
+                console.log(`displayValue: ${displayValue}`);
+            }
+
+            function operatorTo() {
+                if (
+                    currentProc.textContent == "-" &&
+                    display.textContent == 0
+                ) {
+                    return;
+                }
+                if (displayValue == "") {
+                    operatorValue = input;
+                    currentProcess = a + operatorValue;
+                    currentProc.textContent = currentProcess;
+                    return;
+                }
+
+                if (operatorValue != "") {
+                    equalTo();
+                }
+
+                oldValue = displayValue;
+                if (oldValue != result) {
+                    a = oldValue;
+                } else if (oldValue == result) {
+                    a = result;
+                }
+
+                operatorValue = input;
+                displayText = displayValue;
+                if (result != undefined) {
+                    display.textContent = result;
+                } else display.textContent = displayText;
+                displayValue = "";
+                console.log("operatorValue: " + operatorValue);
+                console.log("oldValue: " + oldValue);
+                console.log("a: " + a);
+
+                currentProcess = currentProcess + a + operatorValue;
+                currentProc.textContent = currentProcess;
+            }
 
             function operate() {
                 a = parseInt(a);
@@ -146,7 +234,11 @@
                 operatorValue = "";
                 displayText = "0";
                 oldValue = "";
+                currentProcess = "";
+                history.textContent = "";
                 display.textContent = displayText;
+                currentProc.textContent = "-";
+                input = "";
             }
 
             function printKeyVariables() {
