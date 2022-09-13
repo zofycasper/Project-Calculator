@@ -23,6 +23,10 @@ body {
     width: 200px;
 }
 
+.container-1 {
+    max-width: 422px;
+}
+
 .btn-container {
     display: flex;
     border: solid;
@@ -62,18 +66,20 @@ button:hover {
     border: solid;
     border-top: 0px;
     border-bottom: 0px;
-    height: 100px;
+    height: auto;
     display: flex;
     justify-content: end;
     align-items: center;
     font-size: 80px;
+
     font-weight: 600;
     padding: 10px;
+    max-width: 409px;
 }
 
 .current-display {
     border: solid;
-    height: 30px;
+    min-height: 30px;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -82,6 +88,7 @@ button:hover {
     border-bottom-right-radius: 0px;
     border-bottom: 0px;
     padding: 10px;
+    max-width: 409px;
 }
 
 #n107 {
@@ -101,11 +108,11 @@ button:hover {
     width: 204px;
 }
 
-#clear {
+.clear {
     background-color: rgb(159, 235, 118);
 }
 
-#clear:hover {
+.clear:hover {
     background-color: rgb(115, 169, 85);
 }
 
